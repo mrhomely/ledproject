@@ -1,0 +1,28 @@
+#include <FastLED.h>
+
+#define LED_PIN     6
+#define NUM_LEDS    30
+
+CRGB leds[NUM_LEDS];
+
+void setup() {
+  FastLED.addLeds<WS2812B, LED_PIN, GRB>(leds, NUM_LEDS);
+  randomSeed(analogRead(0));
+}
+
+void loop() {
+  int r = random(255);
+  int g = random(255);
+  int b = random(255);
+  CRGB targetColor = CRGB(r, g, b);
+  
+  while (leds[0] != targetColor) {
+    for (int i = 0; i < NUM_LEDS; i++) {
+      leds[i].fadeToBlackBy(20);
+      leds[i] += (targetColor - leds[i]) / 10;
+    }
+    FastLED.show();
+    delay(20);
+  }
+  delay(10000);
+}
