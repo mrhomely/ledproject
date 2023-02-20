@@ -1,0 +1,37 @@
+#include <FastLED.h>
+
+#define NUM_LEDS 60
+#define DATA_PIN 6
+
+CRGB leds[NUM_LEDS];
+
+void setup() {
+  FastLED.addLeds<WS2812, DATA_PIN, GRB>(leds, NUM_LEDS);
+  FastLED.setBrightness(50);
+}
+
+void loop() {
+  static uint8_t hue = 0;
+
+  // Start the sunrise animation when the board is powered on
+  static bool animation_started = false;
+  if (!animation_started) {
+    animation_started = true;
+    uint8_t start_brightness = 0;
+    uint8_t end_brightness = 255;
+    uint16_t duration = 5 * 60 * 1000; // 5 minutes
+    uint32_t start_time = millis();
+    while (millis() - start_time < duration) {
+      uint8_t brightness = map(millis() - start_time, 0, duration, start_brightness, end_brightness);
+      fill_solid(leds, NUM_LEDS, CHSV(hue, 255, brightness));
+      FastLED.show();
+      delay(10);
+    }
+  }
+
+  // The rest of the loop() function
+  hue++;
+  fill_solid(leds, NUM_LEDS, CHSV(hue, 255, 255));
+  FastLED.show();
+  delay(50);
+}
