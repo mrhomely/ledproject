@@ -1,0 +1,59 @@
+
+
+
+#include <Adafruit_NeoPixel.h>
+#include "FastLED.h"
+
+// Define the number of LEDs in the strip
+int nPixels = 100;
+
+// Define the pin that the LED strip is connected to
+int stripPin = 6;
+
+// Create an instance of the NeoPixel class
+Adafruit_NeoPixel strip(stripPin, nPixels);
+
+// Define the color of the LEDs
+CRGB leds[nPixels];
+
+// Define the brightness of the LEDs
+uint8_t brightness = 0;
+
+// Define the time it takes for the animation to complete
+uint32_t endTime = millis() + 300000;
+
+void setup() {
+  // Initialize the NeoPixel strip
+  strip.begin();
+
+  // Set the brightness of all the LEDs to 0
+  for (int i = 0; i < nPixels; i++) {
+    leds[i] = CRGB(0, 0, 0);
+  }
+}
+
+void loop() {
+  // Update the brightness of the LEDs
+  brightness++;
+
+  // If the brightness is greater than the maximum brightness, reset it to 0
+  if (brightness > 255) {
+    brightness = 0;
+  }
+
+  // Set the brightness of all the LEDs to the current brightness
+  for (int i = 0; i < nPixels; i++) {
+    leds[i] = CRGB(brightness, brightness, brightness);
+  }
+
+  // If the current time is greater than the end time, reset the end time to the current time
+  if (millis() > endTime) {
+    endTime = millis();
+  }
+
+  // Wait for 10 milliseconds
+  delay(10);
+
+  // Repeat the loop
+  loop();
+}
