@@ -1,0 +1,112 @@
+#include <FastLED.h>
+
+#define PIN 5
+#define NUM_PIXELS 101
+
+CRGB leds[NUM_PIXELS];
+
+void setup() {
+  FastLED.addLeds<NEOPIXEL, PIN>(leds, NUM_PIXELS);
+}
+
+void loop() {
+  for (int i = 0; i < NUM_PIXELS; i++) {
+    leds[i] = CRGB(0, 0, 139);
+    FastLED.show();
+    delay(50);
+  }
+  
+  for (int i = NUM_PIXELS - 1; i >= 0; i--) {
+    leds[i] = CRGB(0, 0, 139);
+    FastLED.show();
+    delay(50);
+  }
+
+if (leds[46][0] >= 25) {
+    fade_in_out_multiple(45);
+}
+if (leds[45][0] >= 25) {
+    fade_in_out_multiple(44);
+}
+if (leds[44][0] >= 25) {
+    fade_in_out_multiple(43);
+}
+if (leds[43][0] >= 25) {
+    fade_in_out_multiple(42);
+}
+if (leds[42][0] >= 25) {
+    fade_in_out_multiple(41);
+}
+if (leds[41][0] >= 25) {
+    fade_in_out_multiple(40);
+}
+if (leds[40][0] >= 25) {
+    fade_in_out_multiple(39);
+}
+if (leds[39][0] >= 25) {
+    fade_in_out_multiple(38);
+}
+if (leds[38][0] >= 25) {
+    fade_in_out_multiple(37);
+}
+if (leds[37][0] >= 25) {
+    fade_in_out_multiple(36);
+}
+if (leds[36][0] >= 25) {
+    fade_in_out_multiple(35);
+}
+if (leds[35][0] >= 25) {
+    fade_in_out_multiple(34);
+}
+if (leds[34][0] >= 25) {
+    fade_in_out_multiple(33);
+}
+if (leds[33][0] >= 25) {
+    fade_in_out_multiple(32);
+}
+if (leds[32][0] >= 25) {
+    fade_in_out_multiple(31);
+}
+if (leds[31][0] >= 25) {
+    fade_in_out_multiple(30);
+}
+if (leds[30][0] >= 25) {
+    fade_in_out_multiple(29);
+}
+if (leds[29][0] >= 25) {
+    fade_in_out_multiple(28);
+}
+if (leds[28][0] >= 25) {
+    fade_in_out_multiple(27);
+}
+if (leds[27][0] >= 25) {
+    fade_in_out_multiple(26);
+}
+if (leds[26][0] >= 25) {
+    fade_in_out_multiple(25);
+}
+
+}
+
+void fade_in_out(int pixel_number){
+   for(int i=1;i<=255;i++){
+      leds[pixel_number].setRGB(i/3,i/3,i/3));
+      FastLED.show();
+      delay(10); 
+   }
+   for(int i=255;i>=1;i--){
+      leds[pixel_number].setRGB(i/3,i/3,i/3));
+      FastLED.show();
+      delay(10); 
+   }
+}
+
+void fade_in_out_multiple(int pixel_number){
+   for(int j=1;j<=5;j++){
+      for(int i=1;i<=255;i++){
+         leds[pixel_number].setRGB(i/3,i/3,i/3));
+         FastLED.show();
+         delay(10); 
+      }
+      for(int i=255;i>=1;i--){
+         leds[pixel_number
