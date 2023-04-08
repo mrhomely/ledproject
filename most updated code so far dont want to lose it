@@ -102,8 +102,16 @@ void loop() {
     leds[49] = CRGB(255, green, 0);
     leds[53] = CRGB(255, green, 0);
   }
-
-  
+ // Start increasing green brightness of LEDs 48 and 54 when LEDs 49 and 51 reach 10% green brightness
+  if (green >= 30) {
+    leds[48] = CRGB(255, green, 0);
+    leds[54] = CRGB(255, green, 0);
+  }
+   // Start increasing green brightness of LEDs 47 and 55 when LEDs 48 and 52 reach 10% green brightness
+  if (green >= 30) {
+    leds[47] = CRGB(255, green, 0);
+    leds[55] = CRGB(255, green, 0);
+  }
 
   // Update the LED strip with the new colors
   FastLED.show();
