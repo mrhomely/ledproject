@@ -1,0 +1,49 @@
+#include <FastLED.h>
+
+// Declare the LED strip
+#define LED_PIN    12
+#define NUM_LEDS   100
+CRGB leds[NUM_LEDS];
+
+void setup() {
+  // Initialize the LED strip
+  FastLED.addLeds<NEOPIXEL, LED_PIN>(leds, NUM_LEDS);
+
+  // Set the brightness of the center LED to 1%
+  leds[50] = CRGB(255, 0, 0);
+
+  // Start the brightness animation
+  startAnimation();
+}
+
+void loop() {
+  // Update the LED strip
+  FastLED.show();
+}
+
+void startAnimation() {
+  // Declare the variables
+  int brightness = 1;
+  int ledIndex = 50;
+  int interval = 10;
+
+  // Start the animation loop
+  while (true) {
+    // Increase the brightness of the current LED
+    leds[ledIndex] = CRGB(brightness, 0, 0);
+
+    // Increase the brightness of the next LED
+    if (ledIndex + interval < NUM_LEDS) {
+      leds[ledIndex + interval] = CRGB(brightness, 0, 0);
+    }
+
+    // Increase the brightness of the animation
+    brightness += 1;
+
+    // Increase the LED index
+    ledIndex += interval;
+
+    // Wait for a second
+    delay(1000);
+  }
+}
